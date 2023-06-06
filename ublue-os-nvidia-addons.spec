@@ -1,17 +1,17 @@
 Name:           ublue-os-nvidia-addons
-Version:        0.5
+Version:        0.5.1
 Release:        1%{?dist}
 Summary:        Additional files for nvidia driver support
 
 License:        MIT
-URL:            https://github.com/ublue-os/nvidia
+URL:            https://github.com/awebeer256/ublue-nvidia
 
 BuildArch:      noarch
 Supplements:    mokutil policycoreutils
 
 Source0:        public_key.der
 Source1:        nvidia-container-runtime.repo
-Source2:        lukenukem-asus-linux.repo
+# Source2:        lukenukem-asus-linux.repo
 Source3:        config-rootless.toml
 Source4:        nvidia-container.pp
 Source5:        environment
@@ -28,18 +28,19 @@ Adds various runtime files for nvidia support. These include a key for importing
 # Have different name for *.der in case kmodgenca is needed for creating more keys
 install -Dm0644 %{SOURCE0} %{buildroot}%{_datadir}/ublue-os/%{_sysconfdir}/pki/akmods/certs/akmods-nvidia.der
 install -Dm0644 %{SOURCE1} %{buildroot}%{_datadir}/ublue-os/%{_sysconfdir}/yum.repos.d/nvidia-container-runtime.repo
-install -Dm0644 %{SOURCE2} %{buildroot}%{_datadir}/ublue-os/%{_sysconfdir}/yum.repos.d/lukenukem-asus-linux.repo
+# install -Dm0644 %{SOURCE2} %{buildroot}%{_datadir}/ublue-os/%{_sysconfdir}/yum.repos.d/lukenukem-asus-linux.repo
 install -Dm0644 %{SOURCE3} %{buildroot}%{_datadir}/ublue-os/%{_sysconfdir}/nvidia-container-runtime/config-rootless.toml
 install -Dm0644 %{SOURCE4} %{buildroot}%{_datadir}/ublue-os/%{_datadir}/selinux/packages/nvidia-container.pp
 install -Dm0644 %{SOURCE5} %{buildroot}%{_datadir}/ublue-os/%{_sysconfdir}/sway/environment
 install -Dm0644 %{SOURCE6} %{buildroot}%{_datadir}/ublue-os/%{_sysconfdir}/pki/akmods/certs/akmods-ublue.der
 
-sed -i 's@enabled=1@enabled=0@g' %{buildroot}%{_datadir}/ublue-os/%{_sysconfdir}/yum.repos.d/{lukenukem-asus-linux,nvidia-container-runtime}.repo
+# sed -i 's@enabled=1@enabled=0@g' %{buildroot}%{_datadir}/ublue-os/%{_sysconfdir}/yum.repos.d/{lukenukem-asus-linux,nvidia-container-runtime}.repo
+sed -i 's@enabled=1@enabled=0@g' %{buildroot}%{_datadir}/ublue-os/%{_sysconfdir}/yum.repos.d/nvidia-container-runtime.repo
 
 install -Dm0644 %{buildroot}%{_datadir}/ublue-os/%{_sysconfdir}/pki/akmods/certs/akmods-nvidia.der            %{buildroot}%{_sysconfdir}/pki/akmods/certs/akmods-nvidia.der
 install -Dm0644 %{buildroot}%{_datadir}/ublue-os/%{_sysconfdir}/pki/akmods/certs/akmods-ublue.der             %{buildroot}%{_sysconfdir}/pki/akmods/certs/akmods-ublue.der
 install -Dm0644 %{buildroot}%{_datadir}/ublue-os/%{_sysconfdir}/yum.repos.d/nvidia-container-runtime.repo     %{buildroot}%{_sysconfdir}/yum.repos.d/nvidia-container-runtime.repo
-install -Dm0644 %{buildroot}%{_datadir}/ublue-os/%{_sysconfdir}/yum.repos.d/lukenukem-asus-linux.repo         %{buildroot}%{_sysconfdir}/yum.repos.d/lukenukem-asus-linux.repo
+# install -Dm0644 %{buildroot}%{_datadir}/ublue-os/%{_sysconfdir}/yum.repos.d/lukenukem-asus-linux.repo         %{buildroot}%{_sysconfdir}/yum.repos.d/lukenukem-asus-linux.repo
 install -Dm0644 %{buildroot}%{_datadir}/ublue-os/%{_sysconfdir}/nvidia-container-runtime/config-rootless.toml %{buildroot}%{_sysconfdir}/nvidia-container-runtime/config-rootless.toml
 install -Dm0644 %{buildroot}%{_datadir}/ublue-os/%{_datadir}/selinux/packages/nvidia-container.pp             %{buildroot}%{_datadir}/selinux/packages/nvidia-container.pp
 
@@ -47,18 +48,21 @@ install -Dm0644 %{buildroot}%{_datadir}/ublue-os/%{_datadir}/selinux/packages/nv
 %attr(0644,root,root) %{_datadir}/ublue-os/%{_sysconfdir}/pki/akmods/certs/akmods-nvidia.der
 %attr(0644,root,root) %{_datadir}/ublue-os/%{_sysconfdir}/pki/akmods/certs/akmods-ublue.der
 %attr(0644,root,root) %{_datadir}/ublue-os/%{_sysconfdir}/yum.repos.d/nvidia-container-runtime.repo
-%attr(0644,root,root) %{_datadir}/ublue-os/%{_sysconfdir}/yum.repos.d/lukenukem-asus-linux.repo
+# %attr(0644,root,root) %{_datadir}/ublue-os/%{_sysconfdir}/yum.repos.d/lukenukem-asus-linux.repo
 %attr(0644,root,root) %{_datadir}/ublue-os/%{_sysconfdir}/nvidia-container-runtime/config-rootless.toml
 %attr(0644,root,root) %{_datadir}/ublue-os/%{_datadir}/selinux/packages/nvidia-container.pp
 %attr(0644,root,root) %{_datadir}/ublue-os/%{_sysconfdir}/sway/environment
 %attr(0644,root,root) %{_sysconfdir}/pki/akmods/certs/akmods-nvidia.der
 %attr(0644,root,root) %{_sysconfdir}/pki/akmods/certs/akmods-ublue.der
 %attr(0644,root,root) %{_sysconfdir}/yum.repos.d/nvidia-container-runtime.repo
-%attr(0644,root,root) %{_sysconfdir}/yum.repos.d/lukenukem-asus-linux.repo
+# %attr(0644,root,root) %{_sysconfdir}/yum.repos.d/lukenukem-asus-linux.repo
 %attr(0644,root,root) %{_sysconfdir}/nvidia-container-runtime/config-rootless.toml
 %attr(0644,root,root) %{_datadir}/selinux/packages/nvidia-container.pp
 
 %changelog
+* Mon Jun 06 2023 Adam Beer <awebeer256@users.noreply.github.com> - 0.5.1
+- Remove lukenukem (Not relevant to my use case)
+
 * Sun May 17 2023 Benjamin Sherman <benjamin@holyarmy.org> - 0.5
 - Add new ublue akmod public key for MOK enrollment
 
