@@ -1,11 +1,11 @@
 ARG IMAGE_NAME=silverblue
-ARG BASE_IMAGE=ghcr.io/ublue-os/${IMAGE_NAME}-main
+ARG BASE_IMAGE=ghcr.io/awebeer256/${IMAGE_NAME}-main
 ARG FEDORA_MAJOR_VERSION=37
 
 FROM ${BASE_IMAGE}:${FEDORA_MAJOR_VERSION}
 
 ARG IMAGE_NAME="${IMAGE_NAME}"
-ARG AKMODS_CACHE="ghcr.io/ublue-os/akmods-nvidia"
+ARG AKMODS_CACHE="ghcr.io/awebeer256/akmods-ublue-nvidia"
 ARG AKMODS_VERSION="37"
 ARG NVIDIA_MAJOR_VERSION="525"
 
