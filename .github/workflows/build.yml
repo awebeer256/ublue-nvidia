@@ -42,7 +42,7 @@ jobs:
       - name: Matrix Variables
         run: |
             REPO=${{ github.repository }}
-            echo "IMAGE_NAME=akmods-${REPO##*/}" >> $GITHUB_ENV
+            echo "IMAGE_NAME=${REPO##*/}-akmods" >> $GITHUB_ENV
       - name: Generate tags
         id: generate-tags
         shell: bash
@@ -98,6 +98,7 @@ jobs:
           images: |
             ${{ env.IMAGE_NAME }}
           labels: |
+            # TODO check if these IMAGE_NAMEs cause redundancy (e.g. description: "ublue-os ublue-nvidia-akmods with akmods-nvidia packages...")
             org.opencontainers.image.title=${{ env.IMAGE_NAME }}
             org.opencontainers.image.description=ublue-os ${{ env.IMAGE_NAME }} with akmods-nvidia packages pre-built
             io.artifacthub.package.readme-url=https://raw.githubusercontent.com/${{ github.repository }}/main/README.md
@@ -223,7 +224,7 @@ jobs:
       - name: Matrix Variables
         run: |
             REPO=${{ github.repository }}
-            echo "IMAGE_NAME=${{ matrix.image_name }}-${REPO##*/}" >> $GITHUB_ENV
+            echo "IMAGE_NAME=${REPO##*/}-${{ matrix.image_name }}" >> $GITHUB_ENV
       - name: Generate tags
         id: generate-tags
         shell: bash
